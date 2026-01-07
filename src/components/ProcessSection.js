@@ -1,87 +1,95 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
+import sectionImage from "@/assets/seventh-section.png";
+import Image from "next/image";
 
 const ProcessSection = () => {
-  const steps = [
-    {
-      number: '01',
-      title: 'Consultation',
-      description: 'We meet with you to understand your project requirements and goals',
-    },
-    {
-      number: '02',
-      title: 'Planning',
-      description: 'Our team develops a comprehensive project plan and strategy',
-    },
-    {
-      number: '03',
-      title: 'Execution',
-      description: 'We execute the project with precision and attention to detail',
-    },
-    {
-      number: '04',
-      title: 'Completion',
-      description: 'Final delivery with full documentation and client handover',
-    },
-  ]
+  const temporaryWorks = [
+    "Hoardings",
+    "Sheet Piling",
+    "Working Platforms",
+    "Cofferdam",
+    "Haul Roads",
+    "Fencing",
+    "Thrust Block Designs",
+    "Retaining Walls",
+    "Slope Stability",
+    "Formwork",
+    "Propping/Needling",
+    "UG Services Check",
+    "Service Protection Concrete Slabs",
+  ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-4">
-            Our <span className="text-accent">Process</span>
-          </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            A structured approach to ensure project success
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden">
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+        className="absolute -top-40 -right-40 w-80 h-80 bg-accent rounded-full opacity-5 z-10"
+      />
+      {/* Content Section at Top - White Background */}
+      <div className="bg-[#092540] py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            {/* Centered Heading */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                Other temporary works designs:
+              </h2>
+            </div>
+          </motion.div>
 
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="hidden lg:block absolute top-1/3 left-0 right-0 h-1 bg-gradient-to-r from-accent via-accent to-transparent" />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
+          {/* Grid Layout - 2 Columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+          >
+            {temporaryWorks.map((work, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 + index * 0.05 }}
                 viewport={{ once: true }}
-                className="relative"
+                className="flex items-start gap-3"
               >
-                {/* Step circle */}
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="flex items-center justify-center mb-6"
-                >
-                  <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center text-primary-dark font-bold text-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative z-10 bg-gradient-to-br from-accent to-yellow-400">
-                    {step.number}
-                  </div>
-                </motion.div>
-
-                {/* Content */}
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                  <h3 className="text-xl font-bold text-primary-dark mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
-                </div>
+                <span className="text-accent font-semibold min-w-fit">•</span>
+                <span className="text-white text-base">{work}</span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
+        </div>
+
+        {/* Image Section Below */}
+        <div
+          className="mt-16 rounded-2xl max-w-7xl mx-auto relative h-[70vh] overflow-hidden"
+          style={{
+            backgroundImage: `url(${sectionImage.src})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(31, 41, 55, 0.4) 50%, transparent 100%)",
+            }}
+          />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProcessSection
+export default ProcessSection;

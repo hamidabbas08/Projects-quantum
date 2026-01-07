@@ -1,57 +1,73 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import sectionImage from '@/assets/thirteen-section.png'
 
 const CTASection = () => {
+  const reasons = [
+    'Specialized skills and expertise under one roof.',
+    'Less overhead to the company- cost-effective.',
+    'Can pay daily rates/ wages.',
+    'No pension.',
+    'No other HR and Admin costs.',
+    'Contract basis/ Project basis - project-based work.',
+    'No office space/ electricity/ internet/ mobile.',
+    'Last but not the least that "Where your ideas become reality"'
+  ]
+
   return (
-    <section className="py-20 bg-accent text-primary-dark relative overflow-hidden">
-      {/* Background decoration */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-        className="absolute -top-40 right-0 w-96 h-96 bg-primary-dark rounded-full opacity-5"
-      />
+    <section className="relative overflow-hidden min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${sectionImage.src})` }}>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/70"></div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Start Your Project?
-          </h2>
-
-          <p className="text-lg text-primary-dark text-opacity-80 mb-8 max-w-2xl mx-auto">
-            Let's work together to bring your vision to life. Get in touch with our team today for a free consultation.
-          </p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-primary-dark text-accent font-bold rounded-lg hover:shadow-lg transition-all duration-300"
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left - Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              Get Started
-            </motion.a>
-            <motion.a
-              href="tel:+447440125077"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white bg-opacity-20 text-primary-dark font-bold rounded-lg hover:bg-opacity-30 transition-all duration-300"
-            >
-              Call Us Now
-            </motion.a>
-          </motion.div>
-        </motion.div>
+              {/* Heading with Border */}
+              <div className="flex items-start gap-4 mb-8">
+                <div className="w-2 h-24 bg-accent flex-shrink-0"></div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                  Why should customers choose us?
+                </h2>
+              </div>
+
+              {/* Reasons List */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="space-y-4"
+              >
+                {reasons.map((reason, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
+                    viewport={{ once: true }}
+                    className="flex gap-3"
+                  >
+                    <span className="text-accent font-bold flex-shrink-0 mt-1">•</span>
+                    <p className="text-gray-200 text-sm leading-relaxed">{reason}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right - Empty */}
+            <div></div>
+          </div>
+        </div>
       </div>
     </section>
   )

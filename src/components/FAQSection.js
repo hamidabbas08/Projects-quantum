@@ -1,97 +1,73 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import Image from 'next/image'
+import sectionImage from '@/assets/elevnth-section.jpeg'
 
 const FAQSection = () => {
-  const [openIndex, setOpenIndex] = useState(null)
-
-  const faqs = [
-    {
-      question: 'What services does Projects Quantum offer?',
-      answer: 'We provide comprehensive quantity surveying, civil engineering, temporary works, and project management services for construction projects of all sizes.',
-    },
-    {
-      question: 'Are your professionals certified?',
-      answer: 'Yes, all our professionals are CIOB and RICS certified with extensive experience in the construction industry.',
-    },
-    {
-      question: 'How long have you been in the industry?',
-      answer: 'Projects Quantum has over 20 years of experience delivering exceptional results for clients across the UK and beyond.',
-    },
-    {
-      question: 'Do you offer training programs?',
-      answer: 'Yes, we offer comprehensive training and development programs including CIOB, RICS, and construction safety certifications.',
-    },
-    {
-      question: 'What is your project experience?',
-      answer: 'We have successfully completed over 500 projects ranging from small residential developments to large commercial complexes and infrastructure projects.',
-    },
-    {
-      question: 'How do I get a quote?',
-      answer: 'Contact us through our website or phone number provided in the footer. We will schedule a consultation to understand your project requirements.',
-    },
+  const bulletPoints = [
+    'Lead designer is qualified with BSc Civil Eng, MSc Structural Eng, CCIS qualified, working towards Chartership status and has over 15 years of experience in temporary and permanent works designs.',
+    'Well verse with design softwares, American Standards, Building regulations and Health and Safety regulations',
+    'Well verse with design softwares such as TEDDS 2024, CADSPILED WALL SUITE, ETDOL, Beam Analysis, Slope, WALLAP, TENDON, FIBOS ENGINEERING SAP 2000',
+    'The team consists of experienced professionals with experience in various construction strategies. Key members are particularly recognized as market experts. The business partners, who have been freelancing for the past five years, formally established the company in September 2023.',
+    'We have undertaken numerous multidisciplinary projects in UK.',
+    'Clients such as Network Rail, National Grid, Cadent, House of Fraser, Crown Properties, and various London Boroughs and Councils. We have collaborated with major contractors including MACE, McLaren, BAM Construct, Kier, Fusion, and Axis Europe and Subcon tractors like Alandale, GFS, Mercer, and GKR.'
   ]
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-4">
-            Frequently Asked <span className="text-accent">Questions</span>
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Find answers to common questions about our services
-          </p>
-        </motion.div>
-
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
+    <section className="relative overflow-hidden min-h-screen">
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left - Image */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="relative h-96 md:h-full"
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 flex items-center justify-between hover:bg-gray-50 transition-colors duration-300"
-              >
-                <h3 className="text-lg font-bold text-primary-dark text-left">
-                  {faq.question}
-                </h3>
-                <motion.div
-                  animate={{ rotate: openIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-accent text-2xl flex-shrink-0 ml-4"
-                >
-                  ▼
-                </motion.div>
-              </button>
+              <Image
+                src={sectionImage}
+                alt="Technical team expertise"
+                fill
+                className="object-cover rounded-xl"
+              />
+            </motion.div>
 
+            {/* Right - Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-primary-dark p-8 rounded-xl"
+            >
+              {/* Bullet Points */}
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{
-                  height: openIndex === index ? 'auto' : 0,
-                  opacity: openIndex === index ? 1 : 0,
-                }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="space-y-4"
               >
-                <div className="px-6 pb-6 text-gray-600 leading-relaxed">
-                  {faq.answer}
-                </div>
+                {bulletPoints.map((point, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
+                    viewport={{ once: true }}
+                    className="flex gap-3"
+                  >
+                    <span className="text-accent font-bold flex-shrink-0 mt-1">•</span>
+                    <p className="text-gray-300 text-sm leading-relaxed">{point}</p>
+                  </motion.div>
+                ))}
               </motion.div>
             </motion.div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

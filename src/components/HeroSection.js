@@ -2,18 +2,20 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
+import heroImage from '@/assets/hero.webp'
 
 const HeroSection = () => {
   return (
     <section
       id="home"
-      className="pt-20 min-h-screen relative flex items-center overflow-hidden"
+      className="pt-20 min-h-[70vh] lg:min-h-screen relative flex items-center overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.jpg"
-          alt="Construction"
+          src={heroImage}
+          alt="Projects Quantum Construction"
           fill
           className="object-cover"
           priority
@@ -43,7 +45,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
-            Building Excellence in Construction
+            WHERE <span className="text-accent italic">YOUR IDEAS</span> BECOME <span className="text-accent">REALITY</span>
           </motion.h1>
 
           <motion.p
@@ -52,7 +54,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-200 mb-8"
           >
-            Expert quantity surveying, civil engineering, and construction management services for your ambitious projects.
+            Consultancy for Civil/Structural Engineering & Cost Management
           </motion.p>
 
           <motion.div
@@ -61,12 +63,11 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap gap-4"
           >
-            <button className="px-8 py-3 bg-accent text-primary-dark font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105">
-              Get Quote
-            </button>
-            <button className="px-8 py-3 bg-transparent border-2 border-accent text-accent font-bold rounded-lg hover:bg-accent hover:text-primary-dark transition-all duration-300">
-              Learn More
-            </button>
+            <Link href="/contact-us">
+              <button className="px-8 py-3 bg-accent text-primary-dark font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg hover:scale-105">
+                Contact Us
+              </button>
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -83,8 +84,8 @@ const HeroSection = () => {
             className="relative w-full h-full"
           >
             <Image
-              src="/images/modern-architecture.jpg"
-              alt="Modern Architecture"
+              src={heroImage}
+              alt="Projects Quantum - Civil & Structural Engineering"
               fill
               className="object-cover rounded-2xl shadow-2xl"
             />

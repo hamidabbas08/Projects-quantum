@@ -1,0 +1,13 @@
+application:
+  name: projects-quantum
+  pods:
+    - name: frontend
+      image: registry.nexlayer.io/nexlayer-mcp/9715fb5b-4cba-4a3f-9377-edbe0ca3a266/projects-quantum-a1bb8fb0-frontend:55196473-1767819833
+      path: /
+      servicePorts:
+        - 3000
+      vars:
+        NODE_ENV: production
+        PORT: "3000"
+        HOSTNAME: "0.0.0.0"
+

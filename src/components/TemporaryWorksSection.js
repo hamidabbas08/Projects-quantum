@@ -1,98 +1,70 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import sectionImage from '@/assets/fifth-section.png'
 
-const TemporaryWorksSection = () => {
-  const services = [
-    {
-      title: 'Scaffolding Design',
-      description: 'Custom scaffolding solutions for any project requirement',
-    },
-    {
-      title: 'Formwork Systems',
-      description: 'Advanced formwork design and installation services',
-    },
-    {
-      title: 'Safety Planning',
-      description: 'Comprehensive safety measures and compliance',
-    },
-    {
-      title: 'Site Management',
-      description: 'Complete temporary works management on-site',
-    },
-  ]
-
+const ScaffoldingDesignSection = () => {
   return (
-    <section className="py-20 bg-gray-50 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-4">
-            Temporary <span className="text-accent">Works</span>
-          </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Expert scaffolding and formwork solutions for safe construction
-          </p>
-        </motion.div>
+    <section 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${sectionImage.src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-primary-dark/80 z-0" />
 
-        {/* Image Gallery */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 mb-12"
-        >
-          <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
-            <Image
-              src="/images/formwork-collage.jpg"
-              alt="Formwork Systems"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-          <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
-            <Image
-              src="/images/worker-scaffolding.jpg"
-              alt="Scaffolding Work"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        </motion.div>
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {/* Scaffolding Design Services */}
+            <div className="flex items-start gap-4 mb-8 max-w-2xl">
+              <div className="w-2 h-20 bg-accent flex-shrink-0"></div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                Scaffolding design services including
+              </h2>
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-4 gap-6"
-        >
-          {services.map((service, index) => (
             <motion.div
-              key={index}
-              whileHover={{ scale: 1.05, y: -10 }}
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="space-y-6 ml-6 max-w-2xl"
             >
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">
-                {index + 1}
+              {/* Traditional T&F Scaffolding */}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  • Traditional T&F Scaffolding:
+                </h3>
+                <p className="text-gray-200 text-base leading-relaxed">
+                  This type of scaffolding uses tubes and fittings (T&F) to create a temporary structure for supporting work platforms and materials during construction. It's versatile and can be adapted to various shapes and heights.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-primary-dark mb-2">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 text-sm">{service.description}</p>
+
+              {/* Systems Scaffolding */}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  • Systems Scaffolding:
+                </h3>
+                <p className="text-gray-200 text-base leading-relaxed">
+                  This modular scaffolding system uses pre-engineered components that are easy to assemble and dismantle. Common types include Ringlock, Cuplock, and Haki, which offer flexibility and efficiency for different construction projects.
+                </p>
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
 }
 
-export default TemporaryWorksSection
+export default ScaffoldingDesignSection

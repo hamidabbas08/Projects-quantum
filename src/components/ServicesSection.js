@@ -1,111 +1,89 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { FaRuler, FaCog, FaShieldAlt, FaChartLine } from 'react-icons/fa'
+import { motion } from "framer-motion";
+import Image from "next/image";
+import sectionImage from "@/assets/third-section.png";
 
-const ServicesSection = () => {
-  const services = [
-    {
-      icon: <FaRuler className="text-3xl" />,
-      title: 'Quantity Surveying',
-      description: 'Cost management, budgeting, and financial control for your projects',
-      image: '/images/cost-management.jpg',
-    },
-    {
-      icon: <FaCog className="text-3xl" />,
-      title: 'Civil Engineering',
-      description: 'Design, planning, and execution of infrastructure projects',
-      image: '/images/civil-works.jpg',
-    },
-    {
-      icon: <FaShieldAlt className="text-3xl" />,
-      title: 'Temporary Works',
-      description: 'Scaffolding design, formwork, and temporary structures',
-      image: '/images/formwork-collage.jpg',
-    },
-    {
-      icon: <FaChartLine className="text-3xl" />,
-      title: 'Project Management',
-      description: 'End-to-end project management and coordination services',
-      image: '/images/team.jpg',
-    },
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
+const AimsAndObjectivesSection = () => {
   return (
-    <section id="services" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative overflow-hidden">
+      <div className="grid md:grid-cols-2">
+        {/* Left - Content */}
+        <div className="bg-primary-dark py-36 px-8 md:px-16 flex flex-col justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {/* Aims and Objective */}
+            <div className="mb-12">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-2 h-16 bg-accent"></div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Aims and Objective
+                </h2>
+              </div>
+
+              <div className="space-y-6 text-gray-200 leading-relaxed">
+                <p>
+                  Provide exceptional construction consultancy services that
+                  exceed client expectations, ensuring high standards in value
+                  engineering, project management, cost estimation, and
+                  training.
+                </p>
+                <p>
+                  Facilitate a collaborative approach between designers,
+                  engineers, quantity surveyors and cost planners to foster
+                  innovation, creativity, and cost efficiency throughout the
+                  project lifecycle.
+                </p>
+              </div>
+            </div>
+
+            {/* Motto */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-2 h-12 bg-accent"></div>
+                <h3 className="text-4xl md:text-5xl font-bold text-white">
+                  Motto
+                </h3>
+              </div>
+
+              <p className="text-gray-200 leading-relaxed italic">
+                At the heart of everything we do is the belief that every great
+                project begins with a vision. "Where Your Ideas Become Reality"
+                isn't just a slogan – it's the driving force behind our approach
+                to every client and every challenge.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Right - Image */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="relative min-h-[400px] md:min-h-full"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-4">
-            Our <span className="text-accent">Services</span>
-          </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Comprehensive solutions for all your construction and engineering needs
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group overflow-hidden"
-            >
-              <div className="relative h-40 overflow-hidden">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-primary-dark/40 group-hover:bg-primary-dark/20 transition-all duration-300" />
-              </div>
-              <div className="p-6">
-                <div className="text-accent mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-bold text-primary-dark mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600">{service.description}</p>
-              </div>
-            </motion.div>
-          ))}
+          <Image
+            src={sectionImage}
+            alt="Construction Site with Scaffolding"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-primary-dark/30" />
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ServicesSection
+export default AimsAndObjectivesSection;
