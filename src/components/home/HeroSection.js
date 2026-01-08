@@ -26,26 +26,6 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-dark via-primary-dark/95 to-primary-dark/60" />
       </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden z-5">
-        <motion.div
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.15, 0.1]
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-accent rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.05, 0.1, 0.05]
-          }}
-          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
-          className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-primary-light rounded-full blur-3xl"
-        />
-      </div>
-
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
