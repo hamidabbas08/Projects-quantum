@@ -2,7 +2,7 @@ application:
   name: "projects-quantum"
   pods:
     - name: "frontend"
-      image: "registry.nexlayer.io/nexlayer-mcp/stdev/projects-quantum:1767877788"
+      image: "registry.nexlayer.io/nexlayer-mcp/stdev/projects-quantum:1767882985"
       path: "/"
       servicePorts: [3000]
       vars:

@@ -67,7 +67,7 @@ const TrainingSection = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/30 to-transparent" />
             
             {/* Overlay Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="absolute top-0 left-0 right-0 p-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
