@@ -2,18 +2,16 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import sectionImage from '@/assets/ninth-section.png'
 
-const CommercialServicesSection = () => {
-  const commercialServices = [
-    { title: 'Tendering, Cost planning and estimation', desc: 'We do all pre-construction support to win the projects.' },
-    { title: 'Quantity Surveying', desc: "The team provides contractual expertise, variations, claims and bringing knowledge and experience to our client's commercial teams." },
-    { title: 'Commercial Management', desc: 'We provide expert advice including pre-and post-contract support on all major forms of contract including NEC and JCT.' },
-    { title: 'Dispute Resolution', desc: 'We prevent, manage and resolve contract disputes at all stages of adjudication. Work with our experienced and expert dispute managers.' },
-    { title: 'Expert Contract Advice', desc: 'We offer expert advice at every stage of construction contracts including procurement, subcontracts and supply-chain strategies.' },
-    { title: 'Programming', desc: 'Our programming team can assist with your NEC pre-contract tendering programme, NEC post-contract periodic programme production and NEC compensation event assessment programmes.' },
-    { title: 'Lecturing', desc: 'Construction courses related Programming and Conditions of contract' },
-  ]
+const CommercialServicesSection = ({ data }) => {
+  if (!data) return null
+
+  const sectionLabel = data.sectionLabel
+  const title = data.title
+  const description = data.description
+  const image = data.image?.src
+  const statLabel = data.statLabel
+  const commercialServices = data.services?.map(s => ({ title: s.title, desc: s.description })) || []
 
   return (
     <section className="py-24 bg-white relative">
@@ -26,24 +24,24 @@ const CommercialServicesSection = () => {
             viewport={{ once: true }}
             className="lg:sticky lg:top-24"
           >
-            <span className="text-accent font-semibold text-sm tracking-wider uppercase">Comprehensive Solutions</span>
+            <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mt-4 mb-6">
-              Project Controls & Commercial Management
+              {title}
             </h2>
             <p className="text-gray-600 leading-relaxed mb-8">
-              Our experienced team provides end-to-end commercial management services to ensure your project's success from inception to completion.
+              {description}
             </p>
             
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src={sectionImage}
-                alt="Commercial Management"
+                src={image}
+                alt={title}
                 fill
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/70 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-white font-medium">Expert guidance for every project phase</p>
+                <p className="text-white font-medium">{statLabel}</p>
               </div>
             </div>
           </motion.div>

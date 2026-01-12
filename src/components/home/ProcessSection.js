@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import sectionImage from '@/assets/seventh-section.png'
+import { motion } from "framer-motion";
+import Image from "next/image";
+import sectionImage from "@/assets/seventh-section.png";
 
-const ProcessSection = () => {
-  const temporaryWorks = [
-    { name: 'Hoardings', icon: '🚧' },
-    { name: 'Sheet Piling', icon: '🏗️' },
-    { name: 'Working Platforms', icon: '⬛' },
-    { name: 'Cofferdam', icon: '🌊' },
-    { name: 'Haul Roads', icon: '🛤️' },
-    { name: 'Fencing', icon: '🔒' },
-    { name: 'Thrust Block Designs', icon: '🧱' },
-    { name: 'Retaining Walls', icon: '🧱' },
-    { name: 'Slope Stability', icon: '⛰️' },
-    { name: 'Formwork', icon: '📦' },
-    { name: 'Propping/Needling', icon: '🔩' },
-    { name: 'UG Services Check', icon: '🔍' },
-    { name: 'Service Protection Slabs', icon: '🛡️' },
-  ]
+const ProcessSection = ({ data }) => {
+  if (!data) return null;
+
+  const sectionLabel = data.sectionLabel;
+  const title = data.title;
+  const description = data.description;
+  const image = data.image?.src || sectionImage;
+  const scaffoldingType = data.scaffoldingTypes?.[0];
+
+  // Map services from Contentful
+  const temporaryWorks =
+    data.services?.map((s) => ({
+      name: s.title,
+      iconText: s.iconText || null,
+      iconImage: s.iconImage || null,
+    })) || [];
 
   return (
     <section className="py-24 bg-primary-dark relative overflow-hidden">
       {/* Animated Background */}
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] border border-white/5 rounded-full"
       />
       <motion.div
         animate={{ rotate: -360 }}
-        transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
         className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] border border-white/5 rounded-full"
       />
 
@@ -44,13 +44,13 @@ const ProcessSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-accent font-semibold text-sm tracking-wider uppercase">Our Expertise</span>
+          <span className="text-accent font-semibold text-sm tracking-wider uppercase">
+            {sectionLabel}
+          </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">
-            Temporary Works Designs
+            {title}
           </h2>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Comprehensive temporary works solutions for all your construction needs
-          </p>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">{description}</p>
         </motion.div>
 
         {/* Grid */}
@@ -65,7 +65,19 @@ const ProcessSection = () => {
               className="group bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all duration-300 cursor-pointer"
             >
               <div className="flex items-center gap-4">
-                <span className="text-2xl">{work.icon}</span>
+                <span className="text-2xl">
+                  {work.iconImage ? (
+                    <Image
+                      src={work.iconImage.src}
+                      alt={work.iconImage.alt || work.name}
+                      width={28}
+                      height={28}
+                      className="object-contain"
+                    />
+                  ) : (
+                    work.iconText || "📋"
+                  )}
+                </span>
                 <span className="text-white font-medium group-hover:text-accent transition-colors">
                   {work.name}
                 </span>
@@ -82,27 +94,21 @@ const ProcessSection = () => {
           viewport={{ once: true }}
           className="relative h-[50vh] rounded-3xl overflow-hidden"
         >
-          <Image
-            src={sectionImage}
-            alt="Temporary Works"
-            fill
-            className="object-cover"
-          />
+          <Image src={image} alt={title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/40 to-transparent" />
-          
-          {/* Overlay Content */}
+
           <div className="absolute bottom-0 left-0 right-0 p-8">
             <div className="max-w-2xl">
-              <h3 className="text-2xl font-bold text-white mb-3">Expert Engineering Solutions</h3>
-              <p className="text-gray-300">
-                Our team of experienced engineers delivers safe, efficient, and cost-effective temporary works designs for projects of all scales.
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-3">
+                {scaffoldingType?.title}
+              </h3>
+              <p className="text-gray-300">{scaffoldingType?.description} </p>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProcessSection
+export default ProcessSection;

@@ -5,24 +5,32 @@ import Image from 'next/image'
 import Link from 'next/link'
 import sectionImage from '@/assets/thirteen-section.png'
 
-const CTASection = () => {
-  const reasons = [
-    { text: 'Specialized skills and expertise under one roof', icon: '🎯' },
-    { text: 'Less overhead to the company - cost-effective', icon: '💰' },
-    { text: 'Flexible payment options - daily rates/wages', icon: '📊' },
-    { text: 'No pension or additional HR/Admin costs', icon: '✅' },
-    { text: 'Contract basis / Project basis - project-based work', icon: '📋' },
-    { text: 'No office space/electricity/internet/mobile costs', icon: '🏠' },
-    { text: '"Where your ideas become reality"', icon: '✨' }
-  ]
+const CTASection = ({ data, homeCTAData }) => {
+  if (!data) return null
+
+  // Data from ctaSection (right card)
+  const title = data.title
+  const subtitle = data.subtitle
+  const buttonText = data.buttonText
+  const buttonLink = data.buttonLink
+  const backgroundImage = data.backgroundImage?.src || sectionImage
+  const stat = data.stat
+
+  // Data from homeCTASection (left content)
+  const sectionLabel = homeCTAData?.sectionLabel || 'Benefits'
+  const sectionTitle = homeCTAData?.title || 'Why Choose Us?'
+  const reasons = homeCTAData?.services?.map(service => ({
+    icon: service.iconText,
+    text: service.title
+  })) || []
 
   return (
     <section className="relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
-          src={sectionImage}
-          alt="Why Choose Us"
+          src={backgroundImage}
+          alt={title}
           fill
           className="object-cover"
         />
@@ -38,9 +46,9 @@ const CTASection = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="text-accent font-semibold text-sm tracking-wider uppercase">Benefits</span>
+            <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-8">
-              Why Choose <span className="text-accent">Us?</span>
+              {sectionTitle}
             </h2>
 
             <div className="space-y-4">
@@ -81,15 +89,15 @@ const CTASection = () => {
               </div>
               
               <h3 className="text-2xl font-bold text-primary-dark mb-4 relative z-10">
-                Ready to Start Your Project?
+                {title}
               </h3>
               <p className="text-gray-600 mb-8">
-                Let's discuss how our expertise can help bring your construction vision to life. Our team is ready to assist you.
+                {subtitle}
               </p>
 
-              <Link href="/contact-us">
+              <Link href={buttonLink}>
                 <button className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent/90 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2">
-                  Contact Us Today
+                  {buttonText}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -104,8 +112,12 @@ const CTASection = () => {
                     ))}
                   </div>
                   <div>
-                    <p className="text-primary-dark font-semibold">Join 200+ Clients</p>
-                    <p className="text-gray-500 text-sm">Who trust us with their projects</p>
+                    <p className="text-primary-dark font-semibold">
+                      {stat?.number}
+                    </p>
+                    <p className="text-gray-500 text-sm">
+                      {stat?.label}
+                    </p>
                   </div>
                 </div>
               </div>

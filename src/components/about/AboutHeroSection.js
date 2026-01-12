@@ -4,14 +4,22 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import sectionImage from '@/assets/fifth-section.png'
 
-const AboutHeroSection = () => {
+const AboutHeroSection = ({ data }) => {
+  if (!data) return null
+
+  const badge = data.badge
+  const titleLine1 = data.titleLine1
+  const titleLine2 = data.titleLine2
+  const subtitle = data.subtitle
+  const backgroundImage = data.backgroundImage?.src || sectionImage
+
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={sectionImage}
-          alt="About Us"
+          src={backgroundImage}
+          alt={titleLine1}
           fill
           className="object-cover"
           priority
@@ -33,16 +41,16 @@ const AboutHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium mb-6"
           >
-            About Projects Quantum
+            {badge}
           </motion.span>
           
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Building Excellence
-            <span className="block text-accent">Since 2009</span>
+            {titleLine1}
+            <span className="block text-accent">{titleLine2}</span>
           </h1>
           
           <p className="text-xl text-gray-300 max-w-xl">
-            A trusted partner in civil and structural engineering consultancy, delivering exceptional results across the UK and beyond.
+            {subtitle}
           </p>
         </motion.div>
       </div>

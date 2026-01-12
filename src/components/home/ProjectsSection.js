@@ -4,16 +4,22 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import sectionImage from '@/assets/eight-section.png'
 
-const ProjectsSection = () => {
-  const designItems = [
-    { title: 'Design drawings', icon: '📐' },
-    { title: 'Design Calculations', icon: '🔢' },
-    { title: "Designer's Risk Assessment (DRA)", icon: '⚠️' },
-    { title: 'Design Check Certificates (DCC)', icon: '✅' },
-    { title: 'CAT 3 and CAT 3 – Check Categories', icon: '📋' },
-    { title: 'Network rail forms (if reqd.)', icon: '🚂' },
-    { title: 'Site visits – if required (Inside M25 £300/half day)', icon: '🏗️' },
-  ]
+const ProjectsSection = ({ data }) => {
+  if (!data) return null
+
+  const sectionLabel = data.sectionLabel
+  const title = data.title
+  const description = data.description
+  const image = data.image?.src || sectionImage
+  const statNumber = data.statNumber
+  const statLabel = data.statLabel
+  
+  // Map services from Contentful
+  const designItems = data.services?.map(s => ({
+    title: s.title,
+    iconText: s.iconText || null,
+    iconImage: s.iconImage || null,
+  })) || []
 
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
@@ -25,7 +31,6 @@ const ProjectsSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -35,8 +40,8 @@ const ProjectsSection = () => {
           >
             <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src={sectionImage}
-                alt="Design Submission Package"
+                src={image}
+                alt={title}
                 fill
                 className="object-cover"
               />
@@ -51,8 +56,8 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               className="absolute -bottom-8 -right-8 bg-accent text-white rounded-2xl p-6 shadow-xl"
             >
-              <p className="text-4xl font-bold">7+</p>
-              <p className="text-sm opacity-90">Comprehensive Deliverables</p>
+              <p className="text-4xl font-bold">{statNumber}</p>
+              <p className="text-sm opacity-90">{statLabel}</p>
             </motion.div>
           </motion.div>
 
@@ -63,12 +68,12 @@ const ProjectsSection = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="text-accent font-semibold text-sm tracking-wider uppercase">What's Included</span>
+            <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mt-4 mb-6">
-              Design Submission Package
+              {title}
             </h2>
             <p className="text-gray-600 mb-10 leading-relaxed">
-              Our comprehensive design submission package includes everything you need for successful project approval and execution.
+              {description}
             </p>
 
             <div className="space-y-4">
@@ -82,8 +87,18 @@ const ProjectsSection = () => {
                   whileHover={{ scale: 1.02, y: -4 }}
                   className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(10,37,64,0.15)] hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center text-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] group-hover:bg-gradient-to-br group-hover:from-accent/20 group-hover:to-accent/10 transition-all duration-300">
-                    {item.icon}
+                  <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center text-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] group-hover:bg-gradient-to-br group-hover:from-accent/20 group-hover:to-accent/10 transition-all duration-300 overflow-hidden">
+                    {item.iconImage ? (
+                      <Image
+                        src={item.iconImage.src}
+                        alt={item.iconImage.alt || item.title}
+                        width={32}
+                        height={32}
+                        className="object-contain"
+                      />
+                    ) : (
+                      item.iconText || '📋'
+                    )}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3">

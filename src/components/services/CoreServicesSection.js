@@ -22,24 +22,25 @@ const TrainingIcon = () => (
   </svg>
 )
 
-const CoreServicesSection = () => {
-  const coreServices = [
-    {
-      title: 'Design and Engineering of Temporary Works',
-      Icon: DesignIcon,
-      description: 'Expert scaffolding and temporary works design solutions'
-    },
-    {
-      title: 'Project Controls & Commercial Management',
-      Icon: ProjectIcon,
-      description: 'Complete project oversight and commercial expertise'
-    },
-    {
-      title: 'Training and professional Construction Coaching Service',
-      Icon: TrainingIcon,
-      description: 'Industry-leading training and development programs'
-    },
-  ]
+const CoreServicesSection = ({ data }) => {
+  console.log('CoreServicesSection data:', JSON.stringify(data, null, 2))
+  
+  if (!data) return null
+
+  const sectionLabel = data.sectionLabel;
+  const title = data.title;
+  
+  // Get services from the section
+  const services = data.services || [];
+
+  const defaultIcons = [DesignIcon, ProjectIcon, TrainingIcon]
+  const coreServices = services.map((s, i) => ({ 
+    title: s.title, 
+    description: s.description,
+    iconText: s.iconText || null,
+    iconImage: s.iconImage?.src || null,
+    DefaultIcon: defaultIcons[i % defaultIcons.length]
+  }))
 
   return (
     <section className="py-24 bg-primary-dark relative overflow-hidden">
@@ -60,9 +61,9 @@ const CoreServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-accent font-semibold text-sm tracking-wider uppercase">Core Services</span>
+          <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">
-            Services We Offer
+            {title}
           </h2>
         </motion.div>
         
@@ -81,7 +82,13 @@ const CoreServicesSection = () => {
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors duration-500" />
                 <div className="w-16 h-16 bg-gradient-to-br from-accent/30 to-accent/10 rounded-2xl flex items-center justify-center mb-6 text-accent group-hover:bg-gradient-to-br group-hover:from-accent group-hover:to-accent/80 group-hover:text-white transition-all duration-300 shadow-[0_4px_20px_rgba(212,165,116,0.3)] group-hover:shadow-[0_8px_30px_rgba(212,165,116,0.5)] relative z-10">
-                  <service.Icon />
+                  {service.iconImage ? (
+                    <Image src={service.iconImage} alt={service.title} width={32} height={32} className="w-8 h-8" />
+                  ) : service.iconText ? (
+                    <span className="text-2xl">{service.iconText}</span>
+                  ) : (
+                    <service.DefaultIcon />
+                  )}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3 relative z-10">{service.title}</h3>
                 <p className="text-gray-300 relative z-10">{service.description}</p>

@@ -4,26 +4,22 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import sectionImage from '@/assets/fifth-section.png'
 
-const ServicesHeroSection = () => {
-  const scaffoldingTypes = [
-    {
-      title: 'Traditional T&F Scaffolding',
-      badge: 'T&F',
-      description: "This type of scaffolding uses tubes and fittings (T&F) to create a temporary structure for supporting work platforms and materials during construction. It's versatile and can be adapted to various shapes and heights."
-    },
-    {
-      title: 'Systems Scaffolding',
-      badge: 'SYS',
-      description: 'This modular scaffolding system uses pre-engineered components that are easy to assemble and dismantle. Common types include Ringlock, Cuplock, and Haki, which offer flexibility and efficiency for different construction projects.'
-    }
-  ]
+const ServicesHeroSection = ({ data }) => {
+  if (!data) return null
+
+  const badge = data.badge
+  const titleLine1 = data.titleLine1
+  const titleLine2 = data.titleLine2
+  const backgroundImage = data.backgroundImage?.src || sectionImage
+  // Filter only scaffolding types that have a badge (T&F, SYS)
+  const scaffoldingTypes = (data.scaffoldingTypes || []).filter(type => type.badge)
 
   return (
     <section className="relative min-h-[90vh] flex items-center">
       <div className="absolute inset-0 z-0">
         <Image
-          src={sectionImage}
-          alt="Scaffolding Design"
+          src={backgroundImage}
+          alt={titleLine1}
           fill
           className="object-cover"
           priority
@@ -44,12 +40,12 @@ const ServicesHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium mb-6"
           >
-            Our Services
+            {badge}
           </motion.span>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
-            Scaffolding Design
-            <span className="block text-accent">Services</span>
+            {titleLine1}
+            <span className="block text-accent">{titleLine2}</span>
           </h1>
           
           <div className="grid md:grid-cols-2 gap-8 mt-12">

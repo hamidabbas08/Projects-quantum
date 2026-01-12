@@ -2,8 +2,30 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import Image from 'next/image'
 
-const ContactFormSection = () => {
+const icons = {
+  clock: (
+    <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  shield: (
+    <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  ),
+  team: (
+    <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  )
+}
+
+const ContactFormSection = ({ data }) => {
+  if (!data) return null
+
+  const displayData = data
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,21 +36,50 @@ const ContactFormSection = () => {
 
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
-      setSubmitted(true)
+    setError('')
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject || 'New Contact Form Submission',
+          message: formData.message,
+          from_name: 'Projects Quantum Website',
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitted(true)
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+        setTimeout(() => setSubmitted(false), 5000)
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
+    } catch (err) {
+      setError('Failed to send message. Please try again.')
+    } finally {
       setLoading(false)
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-      setTimeout(() => setSubmitted(false), 5000)
-    }, 1000)
+    }
   }
 
   return (
@@ -42,59 +93,42 @@ const ContactFormSection = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="text-accent font-semibold text-sm tracking-wider uppercase">Send Message</span>
+            <span className="text-accent font-semibold text-sm tracking-wider uppercase">{displayData.badge}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mt-4 mb-6">
-              Let's Start a Conversation
+              {displayData.title}
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Have a project in mind? Fill out the form and our team will get back to you within 24 hours. We're excited to learn about your construction needs.
+              {displayData.subtitle}
             </p>
 
             <div className="space-y-6">
-              <motion.div 
-                className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_30px_rgba(10,37,64,0.12)] border border-gray-100 hover:border-accent/40 transition-all duration-300 cursor-pointer group"
-                whileHover={{ x: 8 }}
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/5 group-hover:from-accent group-hover:to-accent/80 rounded-xl flex items-center justify-center transition-all duration-300 shadow-[0_4px_12px_rgba(212,165,116,0.15)] group-hover:shadow-[0_6px_20px_rgba(212,165,116,0.3)]">
-                  <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary-dark">Quick Response</p>
-                  <p className="text-gray-500 text-sm">We respond within 24 hours</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_30px_rgba(10,37,64,0.12)] border border-gray-100 hover:border-accent/40 transition-all duration-300 cursor-pointer group"
-                whileHover={{ x: 8 }}
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/5 group-hover:from-accent group-hover:to-accent/80 rounded-xl flex items-center justify-center transition-all duration-300 shadow-[0_4px_12px_rgba(212,165,116,0.15)] group-hover:shadow-[0_6px_20px_rgba(212,165,116,0.3)]">
-                  <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary-dark">Expert Consultation</p>
-                  <p className="text-gray-500 text-sm">Free initial project assessment</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_30px_rgba(10,37,64,0.12)] border border-gray-100 hover:border-accent/40 transition-all duration-300 cursor-pointer group"
-                whileHover={{ x: 8 }}
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/5 group-hover:from-accent group-hover:to-accent/80 rounded-xl flex items-center justify-center transition-all duration-300 shadow-[0_4px_12px_rgba(212,165,116,0.15)] group-hover:shadow-[0_6px_20px_rgba(212,165,116,0.3)]">
-                  <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary-dark">Dedicated Team</p>
-                  <p className="text-gray-500 text-sm">Personalized project support</p>
-                </div>
-              </motion.div>
+              {(displayData.features || []).map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  className="flex items-center gap-4 bg-white rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_30px_rgba(10,37,64,0.12)] border border-gray-100 hover:border-accent/40 transition-all duration-300 cursor-pointer group"
+                  whileHover={{ x: 8 }}
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent/5 group-hover:from-accent group-hover:to-accent/80 rounded-xl flex items-center justify-center transition-all duration-300 shadow-[0_4px_12px_rgba(212,165,116,0.15)] group-hover:shadow-[0_6px_20px_rgba(212,165,116,0.3)]">
+                    {feature.iconImage?.src ? (
+                      <Image
+                        src={feature.iconImage.src}
+                        alt={feature.title}
+                        width={24}
+                        height={24}
+                        className="object-contain"
+                      />
+                    ) : feature.iconText ? (
+                      <span className="text-xl text-accent group-hover:text-white transition-colors duration-300">{feature.iconText}</span>
+                    ) : (
+                      icons[feature.iconType] || icons.clock
+                    )}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-primary-dark">{feature.title}</p>
+                    <p className="text-gray-500 text-sm">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
@@ -119,7 +153,20 @@ const ContactFormSection = () => {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Thank you! We'll get back to you soon.</span>
+                  <span>{displayData.successMessage}</span>
+                </motion.div>
+              )}
+
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-3"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{error}</span>
                 </motion.div>
               )}
 
@@ -129,7 +176,7 @@ const ContactFormSection = () => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="John Doe"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -206,7 +253,7 @@ const ContactFormSection = () => {
                   </>
                 ) : (
                   <>
-                    Send Message
+                    {displayData.submitButtonText}
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

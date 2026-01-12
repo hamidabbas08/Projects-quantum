@@ -4,14 +4,22 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import sectionImage from '@/assets/hero.webp'
 
-const ContactHeroSection = () => {
+const ContactHeroSection = ({ data }) => {
+  if (!data) return null
+
+  const badge = data.badge
+  const titleLine1 = data.titleLine1
+  const titleLine2 = data.titleLine2
+  const subtitle = data.subtitle
+  const backgroundImage = data.backgroundImage?.src || sectionImage
+
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={sectionImage}
-          alt="Contact Us"
+          src={backgroundImage}
+          alt={titleLine1}
           fill
           className="object-cover"
           priority
@@ -33,15 +41,15 @@ const ContactHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium mb-6"
           >
-            Get In Touch
+            {badge}
           </motion.span>
           
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Contact <span className="text-accent">Us</span>
+            {titleLine1} <span className="text-accent">{titleLine2}</span>
           </h1>
           
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Ready to discuss your project? We're here to help bring your construction vision to life.
+            {subtitle}
           </p>
         </motion.div>
       </div>
