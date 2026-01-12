@@ -6,10 +6,13 @@ import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const FooterClient = ({ footerData }) => {
   const currentYear = new Date().getFullYear();
-  
+
   if (!footerData) return null;
 
-  const logo = footerData.logo || { src: "/images/logo.png", alt: "Projects Quantum Logo" };
+  const logo = footerData.logo || {
+    src: "/images/logo.png",
+    alt: "Projects Quantum Logo",
+  };
   const tagline = footerData.tagline;
   const quickLinks = footerData.quickLinks || [];
   const address = footerData.address;
@@ -38,9 +41,7 @@ const FooterClient = ({ footerData }) => {
                 className="-mt-16 -ml-10"
               />
             )}
-            <p className="-mt-14 text-gray-300 text-sm">
-              {tagline}
-            </p>
+            <p className="-mt-14 text-gray-300 text-sm">{tagline}</p>
           </motion.div>
 
           <div className="flex gap-14 sm:gap-20">
@@ -54,7 +55,10 @@ const FooterClient = ({ footerData }) => {
               <ul className="space-y-2 text-sm text-gray-300">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="hover:text-accent transition">
+                    <a
+                      href={link.href}
+                      className="hover:text-accent transition"
+                    >
                       {link.label}
                     </a>
                   </li>
@@ -70,13 +74,60 @@ const FooterClient = ({ footerData }) => {
               viewport={{ once: true }}
             >
               <h4 className="font-bold mb-4">Contact</h4>
-              <p className="text-sm text-gray-300 mb-2">
-                📍 {address}
+              <p className="flex gap-1.5 items-center text-sm text-gray-300 mb-2">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span>{address}</span>
               </p>
-              <p className="text-sm text-gray-300 mb-2">
-                📧 {email}
+              <p className="flex gap-1.5 items-center text-sm text-gray-300 mb-2">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>{" "}
+                <span>{email}</span>
               </p>
-              <p className="text-sm text-gray-300">📱 {phone}</p>
+              <p className="flex gap-1.5 items-center text-sm text-gray-300">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                {phone}
+              </p>
             </motion.div>
           </div>
         </div>
@@ -91,8 +142,8 @@ const FooterClient = ({ footerData }) => {
           <p>{copyrightText}</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             {socialLinks.linkedin && (
-              <a 
-                href={socialLinks.linkedin} 
+              <a
+                href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-2xl hover:text-accent transition"
@@ -101,8 +152,8 @@ const FooterClient = ({ footerData }) => {
               </a>
             )}
             {socialLinks.facebook && (
-              <a 
-                href={socialLinks.facebook} 
+              <a
+                href={socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-2xl hover:text-accent transition"
@@ -111,8 +162,8 @@ const FooterClient = ({ footerData }) => {
               </a>
             )}
             {socialLinks.twitter && (
-              <a 
-                href={socialLinks.twitter} 
+              <a
+                href={socialLinks.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-2xl hover:text-accent transition"
@@ -121,8 +172,8 @@ const FooterClient = ({ footerData }) => {
               </a>
             )}
             {socialLinks.instagram && (
-              <a 
-                href={socialLinks.instagram} 
+              <a
+                href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-2xl hover:text-accent transition"
