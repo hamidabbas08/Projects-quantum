@@ -688,14 +688,15 @@ export async function getContactInfo() {
     // Determine icon type based on title
     const getIconType = (title) => {
       const lowerTitle = title?.toLowerCase() || ''
-      if (lowerTitle.includes('address') || lowerTitle.includes('office') || lowerTitle.includes('location')) {
-        return 'location'
+      // Check email first since "Email Address" contains both "email" and "address"
+      if (lowerTitle.includes('email') || lowerTitle.includes('mail')) {
+        return 'email'
       }
       if (lowerTitle.includes('phone') || lowerTitle.includes('call') || lowerTitle.includes('number')) {
         return 'phone'
       }
-      if (lowerTitle.includes('email') || lowerTitle.includes('mail')) {
-        return 'email'
+      if (lowerTitle.includes('address') || lowerTitle.includes('office') || lowerTitle.includes('location')) {
+        return 'location'
       }
       return 'location'
     }
