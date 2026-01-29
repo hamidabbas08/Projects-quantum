@@ -1,0 +1,5 @@
+export { default as HeroSection } from './HeroSection'
+export { default as ProjectsSection } from './ProjectsSection'
+export { default as TrainingSection } from './TrainingSection'
+export { default as ProcessSection } from './ProcessSection'
+export { default as CTASection } from './CTASection'

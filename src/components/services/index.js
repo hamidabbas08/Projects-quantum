@@ -1,0 +1,6 @@
+export { default as ServicesHeroSection } from './ServicesHeroSection'
+export { default as AimsObjectivesSection } from './AimsObjectivesSection'
+export { default as ScaffoldTypesSection } from './ScaffoldTypesSection'
+export { default as CoreServicesSection } from './CoreServicesSection'
+export { default as CommercialServicesSection } from './CommercialServicesSection'
+export { default as ServicesCTASection } from './ServicesCTASection'
