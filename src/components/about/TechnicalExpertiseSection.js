@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import sectionImage from "@/assets/elevnth-section.jpeg";
 
 const TechnicalExpertiseSection = ({ data }) => {
   if (!data) return null;
@@ -117,7 +116,7 @@ const TechnicalExpertiseSection = ({ data }) => {
             {/* Image */}
             <div className="relative h-[350px] rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src={image || sectionImage}
+                src={image}
                 alt={title}
                 fill
                 className="object-cover"

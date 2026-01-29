@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import sectionImage from '@/assets/hero.webp'
 
 const ContactHeroSection = ({ data }) => {
   if (!data) return null
@@ -11,7 +10,7 @@ const ContactHeroSection = ({ data }) => {
   const titleLine1 = data.titleLine1
   const titleLine2 = data.titleLine2
   const subtitle = data.subtitle
-  const backgroundImage = data.backgroundImage?.src || sectionImage
+  const backgroundImage = data.backgroundImage?.src
 
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">

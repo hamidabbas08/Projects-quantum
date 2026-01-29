@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import sectionImage from '@/assets/thirteen-section.png'
 
 const CTASection = ({ data, homeCTAData }) => {
   if (!data) return null
@@ -13,7 +12,7 @@ const CTASection = ({ data, homeCTAData }) => {
   const subtitle = data.subtitle
   const buttonText = data.buttonText
   const buttonLink = data.buttonLink
-  const backgroundImage = data.backgroundImage?.src || sectionImage
+  const backgroundImage = data.backgroundImage?.src
   const stat = data.stat
 
   // Data from homeCTASection (left content)
