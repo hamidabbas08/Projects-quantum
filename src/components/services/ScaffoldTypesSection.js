@@ -21,7 +21,7 @@ const ScaffoldTypesSection = ({ sectionData }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center max-sm:text-left mb-16"
         >
           <span className="text-accent font-semibold text-sm tracking-wider uppercase">
             {sectionLabel}

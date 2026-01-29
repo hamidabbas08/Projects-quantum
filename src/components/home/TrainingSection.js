@@ -29,10 +29,10 @@ const TrainingSection = ({ data }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-sm:text-left"
         >
-          <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mt-4">
+          <span className="text-accent  font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
+          <h2 className="text-4xl  md:text-5xl font-bold text-primary-dark mt-4">
             {title}
           </h2>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">

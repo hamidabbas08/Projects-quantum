@@ -41,7 +41,7 @@ const ProcessSection = ({ data }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-sm:text-left"
         >
           <span className="text-accent font-semibold text-sm tracking-wider uppercase">
             {sectionLabel}
@@ -61,9 +61,9 @@ const ProcessSection = ({ data }) => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="group bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all duration-300 cursor-pointer"
+              className="group bg-white/5 backdrop-blur-sm max-sm:text-sm  rounded-xl p-5 border border-white/10 hover:bg-white/10 hover:border-accent/50 transition-all duration-300 cursor-pointer"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center max-sm:gap-3 gap-4">
                 <span className="text-2xl">
                   {work.iconImage ? (
                     <Image

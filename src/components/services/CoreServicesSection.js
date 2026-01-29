@@ -58,7 +58,7 @@ const CoreServicesSection = ({ data }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-sm:text-left"
         >
           <span className="text-accent font-semibold text-sm tracking-wider uppercase">{sectionLabel}</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">

@@ -23,7 +23,7 @@ const AboutCTASection = ({ data }) => {
         className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl"
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8  text-center max-sm:text-left relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ const AboutCTASection = ({ data }) => {
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
             {subtitle}
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 max-sm:justify-start justify-center">
             <Link href={buttonLink}>
               <motion.button 
                 whileHover={{ scale: 1.05, y: -3 }}

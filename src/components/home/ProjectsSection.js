@@ -85,9 +85,9 @@ const ProjectsSection = ({ data }) => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.02, y: -4 }}
-                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(10,37,64,0.15)] hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 cursor-pointer"
+                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(10,37,64,0.15)] max-sm:text-sm max-sm:gap-3 hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center text-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] group-hover:bg-gradient-to-br group-hover:from-accent/20 group-hover:to-accent/10 transition-all duration-300 overflow-hidden">
+                  <div className="w-12 h-12 max-sm:h-7 max-sm:w-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center text-2xl shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] group-hover:bg-gradient-to-br group-hover:from-accent/20 group-hover:to-accent/10 transition-all duration-300 overflow-hidden">
                     {item.iconImage ? (
                       <Image
                         src={item.iconImage.src}
@@ -102,7 +102,7 @@ const ProjectsSection = ({ data }) => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <h4 className="font-semibold text-primary-dark group-hover:text-white transition-colors">
+                      <h4 className="font-semibold text-primary-dark  group-hover:text-white transition-colors">
                         {item.title}
                       </h4>
                     </div>
