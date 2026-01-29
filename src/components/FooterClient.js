@@ -44,7 +44,7 @@ const FooterClient = ({ footerData }) => {
             <p className="-mt-14 text-gray-300 text-sm">{tagline}</p>
           </motion.div>
 
-          <div className="flex gap-14 sm:gap-20">
+          <div className="flex gap-14 max-sm:gap-6 max-sm:flex-col sm:gap-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
