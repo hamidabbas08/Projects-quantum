@@ -14,7 +14,6 @@ const CTASection = ({ data, homeCTAData }) => {
   const buttonLink = data.buttonLink
   const backgroundImage = data.backgroundImage?.src
   const stat = data.stat
-
   // Data from homeCTASection (left content)
   const sectionLabel = homeCTAData?.sectionLabel || 'Benefits'
   const sectionTitle = homeCTAData?.title || 'Why Choose Us?'

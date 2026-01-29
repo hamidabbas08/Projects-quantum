@@ -28,7 +28,7 @@ const CoreServicesSection = ({ data }) => {
 
   const sectionLabel = data.sectionLabel;
   const title = data.title;
-  
+  const backgroundImage = data.image?.src
   // Get services from the section
   const services = data.services || [];
 
@@ -43,14 +43,14 @@ const CoreServicesSection = ({ data }) => {
 
   return (
     <section className="py-24 bg-primary-dark relative overflow-hidden">
-      {/* <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10">
         <Image
-          src={sectionImage}
+          src={backgroundImage}
           alt="Background"
           fill
           className="object-cover"
         />
-      </div> */}
+      </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
