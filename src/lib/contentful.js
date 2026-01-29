@@ -48,13 +48,10 @@ const HEADER_QUERY = gql`
 
 export async function getHeader() {
   try {
-    console.log('Fetching header from Contentful...')
     const data = await client.request(HEADER_QUERY)
-    console.log('Header raw response:', JSON.stringify(data, null, 2))
     const item = data.headerCollection?.items?.[0]
 
     if (!item) {
-      console.log('No header item found')
       return null
     }
 
@@ -149,13 +146,10 @@ const HERO_SECTION_QUERY = gql`
 
 export async function getHeroSection(page) {
   try {
-    console.log(`Fetching hero section for page: ${page}...`)
     const data = await client.request(HERO_SECTION_QUERY, { page })
-    console.log(`Hero section raw response for ${page}:`, JSON.stringify(data, null, 2))
     const item = data.heroSectionCollection?.items?.[0]
 
     if (!item) {
-      console.log(`No hero section found for page: ${page}`)
       return null
     }
 
@@ -211,13 +205,10 @@ const CTA_SECTION_QUERY = gql`
 
 export async function getCTASection(page) {
   try {
-    console.log(`Fetching CTA section for page: ${page}...`)
     const data = await client.request(CTA_SECTION_QUERY, { page })
-    console.log(`CTA section raw response for ${page}:`, JSON.stringify(data, null, 2))
     const item = data.ctaSectionCollection?.items?.[0]
 
     if (!item) {
-      console.log(`No CTA section found for page: ${page}`)
       return null
     }
 
@@ -474,14 +465,11 @@ const SECTION_WITH_TAGS_QUERY = gql`
 
 export async function getSection(sectionId, includeTags = false) {
   try {
-    console.log(`Fetching section: ${sectionId}...`)
     const query = includeTags ? SECTION_WITH_TAGS_QUERY : SECTION_QUERY
     const data = await client.request(query, { sectionId })
-    console.log(`Section raw response for ${sectionId}:`, JSON.stringify(data, null, 2))
     const item = data.sectionCollection?.items?.[0]
 
     if (!item) {
-      console.log(`No section found for sectionId: ${sectionId}`)
       return null
     }
 
@@ -935,16 +923,6 @@ export async function getHomePageData() {
       getFloatingBadges(),
     ])
 
-  console.log('============ HOME PAGE DATA ============')
-  console.log('heroSection:', JSON.stringify(heroSection, null, 2))
-  console.log('designSubmission:', JSON.stringify(designSubmission, null, 2))
-  console.log('trainingSection:', JSON.stringify(trainingSection, null, 2))
-  console.log('processSection:', JSON.stringify(processSection, null, 2))
-  console.log('ctaSection:', JSON.stringify(ctaSection, null, 2))
-  console.log('homeCTASection:', JSON.stringify(homeCTASection, null, 2))
-  console.log('floatingBadges:', JSON.stringify(floatingBadges, null, 2))
-  console.log('========================================')
-
   return {
     heroSection,
     designSubmission,
@@ -973,14 +951,6 @@ export async function getAboutPageData() {
     expertiseItems: technicalExpertiseItems,
   }
 
-  console.log('============ ABOUT PAGE DATA ============')
-  console.log('heroSection:', JSON.stringify(heroSection, null, 2))
-  console.log('teamSection:', JSON.stringify(teamSection, null, 2))
-  console.log('teamExpertise:', JSON.stringify(teamExpertise, null, 2))
-  console.log('technicalExpertise:', JSON.stringify(technicalExpertise, null, 2))
-  console.log('ctaSection:', JSON.stringify(ctaSection, null, 2))
-  console.log('=========================================')
-
   return {
     heroSection,
     teamSection,
@@ -1003,16 +973,6 @@ export async function getServicesPageData() {
       getCTASection('services'),
     ])
 
-  console.log('============ SERVICES PAGE DATA ============')
-  console.log('heroSection:', JSON.stringify(heroSection, null, 2))
-  console.log('scaffoldingTypes:', JSON.stringify(scaffoldingTypes, null, 2))
-  console.log('servicesSection:', JSON.stringify(servicesSection, null, 2))
-  console.log('aimsObjectives:', JSON.stringify(aimsObjectives, null, 2))
-  console.log('coreServicesSection:', JSON.stringify(coreServicesSection, null, 2))
-  console.log('comprehensiveServices:', JSON.stringify(comprehensiveServices, null, 2))
-  console.log('ctaSection:', JSON.stringify(ctaSection, null, 2))
-  console.log('=============================================')
-
   return {
     heroSection,
     scaffoldingTypes,
@@ -1031,12 +991,6 @@ export async function getContactPageData() {
     getContactInfo(),
     getContactFormSection(),
   ])
-
-  console.log('============ CONTACT PAGE DATA ============')
-  console.log('heroSection:', JSON.stringify(heroSection, null, 2))
-  console.log('contactInfo:', JSON.stringify(contactInfo, null, 2))
-  console.log('contactFormSection:', JSON.stringify(contactFormSection, null, 2))
-  console.log('============================================')
 
   return {
     heroSection,

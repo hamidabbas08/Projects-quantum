@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import sectionImage from "@/assets/seventh-section.png";
 
 const ProcessSection = ({ data }) => {
   if (!data) return null;
@@ -10,7 +9,7 @@ const ProcessSection = ({ data }) => {
   const sectionLabel = data.sectionLabel;
   const title = data.title;
   const description = data.description;
-  const image = data.image?.src || sectionImage;
+  const image = data.image?.src;
   const scaffoldingType = data.scaffoldingTypes?.[0];
 
   // Map services from Contentful

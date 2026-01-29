@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import sectionImage from '@/assets/tenth-section.png'
 
 const TrainingSection = ({ data }) => {
   if (!data) return null
@@ -10,7 +9,7 @@ const TrainingSection = ({ data }) => {
   const sectionLabel = data.sectionLabel
   const title = data.title
   const description = data.description
-  const image = data.image?.src || sectionImage
+  const image = data.image?.src
   const scaffoldingType = data.scaffoldingTypes?.[0] || null
   
   // Map services from Contentful
