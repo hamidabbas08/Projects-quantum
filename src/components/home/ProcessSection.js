@@ -91,14 +91,14 @@ const ProcessSection = ({ data }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative h-[50vh] rounded-3xl overflow-hidden"
+          className="relative h-[50vh] max-sm:h-[67vh] rounded-3xl overflow-hidden"
         >
           <Image src={image} alt={title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/40 to-transparent" />
 
-          <div className="absolute bottom-0 left-0 right-0 p-8">
+          <div className="absolute bottom-0 left-0  right-0 p-8">
             <div className="max-w-2xl">
-              <h3 className="text-2xl font-bold text-white mb-3">
+              <h3 className="text-2xl max-sm:text-xl  font-bold text-white mb-3">
                 {scaffoldingType?.title}
               </h3>
               <p className="text-gray-300">{scaffoldingType?.description} </p>

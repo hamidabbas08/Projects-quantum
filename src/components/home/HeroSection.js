@@ -140,7 +140,7 @@ const HeroSection = ({ data, floatingBadges = [] }) => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.2)] transition-all duration-300 border border-gray-100"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex  items-center gap-4">
                       <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/5 rounded-xl flex items-center justify-center shadow-[0_4px_12px_rgba(212,165,116,0.2)]">
                         <svg className="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

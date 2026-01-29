@@ -32,7 +32,7 @@ const ContactHeroSection = ({ data }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center"
+          className="text-center max-sm:text-left"
         >
           <motion.span
             initial={{ opacity: 0, y: -20 }}

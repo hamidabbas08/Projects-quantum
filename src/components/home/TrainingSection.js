@@ -68,7 +68,7 @@ const TrainingSection = ({ data }) => {
                   viewport={{ once: true }}
                   className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
                 >
-                  <h3 className="text-xl font-bold text-white mb-2">{scaffoldingType.title}</h3>
+                  <h3 className="text-xl max-sm:text-base font-bold text-white mb-2">{scaffoldingType.title}</h3>
                   <p className="text-gray-200 text-sm">
                     {scaffoldingType.description}
                   </p>
@@ -106,7 +106,7 @@ const TrainingSection = ({ data }) => {
                     )}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-primary-dark mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-lg max-sm:text-base font-bold text-primary-dark mb-3 group-hover:text-accent transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
