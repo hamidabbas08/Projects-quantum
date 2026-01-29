@@ -2,14 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import sectionImage from "@/assets/third-section.png";
 
 const AimsObjectivesSection = ({ data }) => {
   if (!data) return null;
 
   const sectionLabel = data.sectionLabel;
   const title = data.title;
-  const image = data.image?.src || sectionImage;
+  const image = data.image?.src;
   const services = data.services || [];
   const statNumber = data.statNumber;
   const statLabel = data.statLabel;

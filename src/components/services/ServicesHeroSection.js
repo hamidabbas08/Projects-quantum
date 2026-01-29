@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import sectionImage from '@/assets/fifth-section.png'
 
 const ServicesHeroSection = ({ data }) => {
   if (!data) return null
@@ -10,7 +9,7 @@ const ServicesHeroSection = ({ data }) => {
   const badge = data.badge
   const titleLine1 = data.titleLine1
   const titleLine2 = data.titleLine2
-  const backgroundImage = data.backgroundImage?.src || sectionImage
+  const backgroundImage = data.backgroundImage?.src
   // Filter only scaffolding types that have a badge (T&F, SYS)
   const scaffoldingTypes = (data.scaffoldingTypes || []).filter(type => type.badge)
 

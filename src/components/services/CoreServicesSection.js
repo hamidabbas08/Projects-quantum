@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import sectionImage from '@/assets/fourth-section.png'
+// import sectionImage from '@/assets/fourth-section.png'
 
 const DesignIcon = () => (
   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,6 @@ const TrainingIcon = () => (
 )
 
 const CoreServicesSection = ({ data }) => {
-  console.log('CoreServicesSection data:', JSON.stringify(data, null, 2))
   
   if (!data) return null
 
@@ -44,14 +43,14 @@ const CoreServicesSection = ({ data }) => {
 
   return (
     <section className="py-24 bg-primary-dark relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
+      {/* <div className="absolute inset-0 opacity-10">
         <Image
           src={sectionImage}
           alt="Background"
           fill
           className="object-cover"
         />
-      </div>
+      </div> */}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
